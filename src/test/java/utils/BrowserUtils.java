@@ -1,5 +1,6 @@
 package utils;
 
+import io.cucumber.java.Scenario;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Set;
 
 public class BrowserUtils {
@@ -88,4 +90,21 @@ public static void getScreenShot(WebDriver driver, String packageName) {
     }
 
 
-}}
+}
+public static void getScreanshotForCucumber(WebDriver driver,Scenario scenario)  {
+    Date currentDate=new Date();
+    String screeanShotFileName=currentDate.toString().replace(" ","-").
+            replace(":","-");
+    if(scenario.isFailed()){
+        File screenShotFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+       try{ FileUtils.copyFile(screenShotFile,new File("src/test/java/screenshot/"+screeanShotFileName+".png"));
+
+    }catch(IOException e){
+       throw new RuntimeException(e);}
+    }
+}
+
+
+
+
+}

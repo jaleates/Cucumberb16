@@ -14,7 +14,7 @@ public class configReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return properties.getProperty(key); //to be able read data from file.
+        return properties.getProperty(key); //to be able to read data from file.
 
     }
 }
